@@ -61,8 +61,7 @@ export async function DELETE(req: NextRequest) {
       deletedCustomers: deletedCustomers.count,
     })
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err)
     console.error('[import/clear] error:', err)
-    return NextResponse.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

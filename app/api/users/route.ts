@@ -25,7 +25,8 @@ export async function GET(req: NextRequest) {
     })
     return NextResponse.json({ users })
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 })
+    console.error('[users GET]', e)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
@@ -57,6 +58,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ user }, { status: 201 })
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 })
+    console.error('[users POST]', e)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

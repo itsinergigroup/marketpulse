@@ -185,8 +185,7 @@ export async function POST(req: NextRequest) {
       skippedRows:  allSkippedRows,
     })
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err)
     console.error('[import/tiktok] unhandled error:', err)
-    return NextResponse.json({ error: message }, { status: 500 })
+    return NextResponse.json({ error: 'Import failed. Check server logs.' }, { status: 500 })
   }
 }

@@ -290,6 +290,7 @@ export async function POST(req: NextRequest) {
     const message = err instanceof Error ? err.message : String(err)
     const stack   = err instanceof Error ? err.stack   : undefined
     console.error('[import] unhandled error:', stack ?? err)
-    return NextResponse.json({ error: message, stack }, { status: 500 })
+    void stack
+    return NextResponse.json({ error: 'Import failed. Check server logs.' }, { status: 500 })
   }
 }

@@ -33,7 +33,8 @@ export async function PUT(req: NextRequest, { params }: Params) {
 
     return NextResponse.json({ user })
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 })
+    console.error('[users PUT]', e)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
@@ -54,6 +55,7 @@ export async function DELETE(req: NextRequest, { params }: Params) {
     await prisma.user.delete({ where: { id } })
     return NextResponse.json({ success: true })
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 })
+    console.error('[users DELETE]', e)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
