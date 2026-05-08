@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Platform {
+  shopee
+  tiktok
+}
+
+enum CustomerTag {
+  new
+  repeat
+  vip
+  at_risk
+  lost
+}
+
+enum UserRole {
+  admin
+  staff
+}
+
+enum ContactStatus {
+  belum_dihubungi
+  menunggu_balasan
+  terkontак
+  diabaikan
+  gagal_hubungi
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String
+  email         String          @unique
+  password      String
+  role          UserRole        @default(staff)
+  followUps     FollowUp[]
+  importHistory ImportHistory[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model Customer {
+  id            String      @id @default(cuid())
+  name          String
+  phone         String?
+  platform      Platform
+  tag           CustomerTag @default(new)
+  totalOrders   Int         @default(0)
+  totalSpend    Float       @default(0)
+  lastOrderDate DateTime?
+  orders        Order[]
+  followUp      FollowUp?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@unique([name, platform])
+}
+
+model Order {
+  id          String   @id @default(cuid())
+  customerId  String
+  customer    Customer @relation(fields: [customerId], references: [id])
+  orderNumber String   @unique
+  platform    Platform
+  totalAmount Float
+  orderDate   DateTime
+  status      String
+  productName String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ImportHistory {
+  id         String   @id @default(cuid())
+  platform   Platform
+  fileName   String
+  totalRows  Int
+  imported   Int
+  skipped    Int
+  durationMs Int
+  importedAt DateTime @default(now())
+  importedBy String
+  user       User     @relation(fields: [importedBy], references: [id])
+}
+
+model FollowUp {
+  id             String        @id @default(cuid())
+  customerId     String        @unique
+  customer       Customer      @relation(fields: [customerId], references: [id])
+  contactStatus  ContactStatus @default(belum_dihubungi)
+  responseNote   String?
+  followedUpById String?
+  followedUpBy   User?         @relation(fields: [followedUpById], references: [id])
+  followedUpAt   DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
