@@ -102,7 +102,7 @@ function DeleteHistoryModal({ record, onClose, onDeleted }: DeleteHistoryModalPr
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-lg w-full max-w-md p-xl flex flex-col gap-md mx-md">
+      <div className="bg-surface-container-lowest rounded-xl shadow-elevation-3 w-full max-w-md p-xl flex flex-col gap-md mx-md">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-sm">
             <span className="material-symbols-outlined text-error text-[24px]">delete</span>
@@ -163,14 +163,14 @@ function DeleteHistoryModal({ record, onClose, onDeleted }: DeleteHistoryModalPr
         <div className="flex gap-sm justify-end">
           <button
             onClick={onClose}
-            className="px-lg py-sm rounded-lg border border-outline-variant text-label-md text-on-surface hover:bg-surface-container-low transition-colors"
+            className="px-lg py-sm rounded-full border border-outline text-label-md text-on-surface hover:bg-surface-container-low transition-colors"
           >
             Batal
           </button>
           <button
             onClick={handleDelete}
             disabled={!checked || deleting}
-            className="px-lg py-sm rounded-lg bg-error text-on-error text-label-md font-medium hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-lg py-sm rounded-full bg-error text-on-error text-label-md font-medium hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {deleting ? 'Menghapus...' : 'Ya, Hapus'}
           </button>
@@ -220,7 +220,7 @@ function ClearPlatformModal({ platform, onClose, onCleared }: ClearPlatformModal
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-lg w-full max-w-md p-xl flex flex-col gap-md mx-md">
+      <div className="bg-surface-container-lowest rounded-xl shadow-elevation-3 w-full max-w-md p-xl flex flex-col gap-md mx-md">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-sm">
             <span className="material-symbols-outlined text-error text-[24px]">warning</span>
@@ -257,14 +257,14 @@ function ClearPlatformModal({ platform, onClose, onCleared }: ClearPlatformModal
         <div className="flex gap-sm justify-end">
           <button
             onClick={onClose}
-            className="px-lg py-sm rounded-lg border border-outline-variant text-label-md text-on-surface hover:bg-surface-container-low transition-colors"
+            className="px-lg py-sm rounded-full border border-outline text-label-md text-on-surface hover:bg-surface-container-low transition-colors"
           >
             Batal
           </button>
           <button
             onClick={handleClear}
             disabled={!checked || clearing}
-            className="px-lg py-sm rounded-lg bg-error text-on-error text-label-md font-medium hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-lg py-sm rounded-full bg-error text-on-error text-label-md font-medium hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {clearing ? 'Menghapus...' : `Hapus Semua Data ${label}`}
           </button>
@@ -399,17 +399,17 @@ export default function ImportPage() {
       </div>
 
       {/* Platform selector */}
-      <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md">
+      <div className="bg-surface-container-low rounded-xl p-lg flex flex-col gap-md shadow-elevation-1">
         <h2 className="text-h2 text-on-surface">Pilih Platform</h2>
         <div className="flex gap-sm">
           {platformOptions.map((p) => (
             <button
               key={p.value}
               onClick={() => setPlatform(p.value)}
-              className={`flex items-center gap-sm px-lg py-sm rounded-lg border-2 transition-colors text-label-md font-medium ${
+              className={`flex items-center gap-sm px-lg py-sm rounded-full border-2 transition-colors text-label-md font-medium ${
                 platform === p.value
-                  ? 'border-primary text-primary bg-surface-container-low'
-                  : 'border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary'
+                  ? 'border-primary text-primary bg-secondary-container'
+                  : 'border-outline text-on-surface-variant hover:border-primary hover:text-primary'
               }`}
             >
               <span className={`inline-flex items-center justify-center w-6 h-6 rounded ${p.color} text-white font-bold text-xs`}>
@@ -422,7 +422,7 @@ export default function ImportPage() {
       </div>
 
       {/* Column guide */}
-      <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md">
+      <div className="bg-surface-container-low rounded-xl p-lg flex flex-col gap-md shadow-elevation-1">
         <h2 className="text-h2 text-on-surface">Kolom yang Diproses ({platform === 'shopee' ? 'Shopee' : 'TikTok'})</h2>
         <p className="text-body-sm text-on-surface-variant">Kolom lain dalam file akan diabaikan secara otomatis.</p>
         <div className="overflow-x-auto">
@@ -446,7 +446,7 @@ export default function ImportPage() {
       </div>
 
       {/* File upload */}
-      <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md">
+      <div className="bg-surface-container-low rounded-xl p-lg flex flex-col gap-md shadow-elevation-1">
         <h2 className="text-h2 text-on-surface">Upload File</h2>
 
         <div
@@ -555,7 +555,7 @@ export default function ImportPage() {
         <button
           disabled={!file || loading}
           onClick={handleImport}
-          className="self-start flex items-center gap-sm bg-primary text-on-primary rounded-lg px-lg py-sm text-label-md font-medium hover:bg-primary-container transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="self-start flex items-center gap-sm bg-primary text-on-primary rounded-full px-lg py-sm text-label-md font-medium hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? (
             <Spinner />
@@ -569,7 +569,7 @@ export default function ImportPage() {
       </div>
 
       {/* ── Import History ─────────────────────────────────────────────────── */}
-      <div className="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+      <div className="bg-surface-container-low rounded-xl overflow-hidden shadow-elevation-1">
         <div className="px-lg py-md border-b border-outline-variant flex items-center justify-between">
           <div>
             <h2 className="text-h2 text-on-surface">Riwayat Import</h2>
@@ -580,7 +580,7 @@ export default function ImportPage() {
           <button
             onClick={loadHistory}
             disabled={historyLoading}
-            className="inline-flex items-center gap-xs px-sm py-xs rounded border border-outline-variant text-label-sm text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-40"
+            className="inline-flex items-center gap-xs px-sm py-xs rounded-full border border-outline text-label-sm text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-40"
           >
             <span className={`material-symbols-outlined text-[16px] ${historyLoading ? 'animate-spin' : ''}`}>refresh</span>
           </button>
@@ -588,7 +588,7 @@ export default function ImportPage() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-body-md min-w-[640px]">
-            <thead className="bg-surface-container-low">
+            <thead className="bg-surface-container">
               <tr>
                 <th className="text-left px-md py-sm text-label-sm text-on-surface-variant font-medium">Platform</th>
                 <th className="text-left px-md py-sm text-label-sm text-on-surface-variant font-medium">Nama File</th>
@@ -650,7 +650,7 @@ export default function ImportPage() {
 
       {/* ── Danger Zone — admin only ────────────────────────────────────────── */}
       {isAdmin ? (
-        <div className="bg-surface-container-lowest border border-error rounded-xl p-lg flex flex-col gap-md">
+        <div className="bg-surface-container-low border border-error rounded-xl p-lg flex flex-col gap-md shadow-elevation-1">
           <div>
             <h2 className="text-h2 text-error">Zona Bahaya</h2>
             <p className="text-body-sm text-on-surface-variant mt-xs">
@@ -660,14 +660,14 @@ export default function ImportPage() {
           <div className="flex gap-sm flex-wrap">
             <button
               onClick={() => setClearPlatform('shopee')}
-              className="flex items-center gap-sm px-md py-sm rounded-lg border border-error text-error text-label-md font-medium hover:bg-error-container transition-colors"
+              className="flex items-center gap-sm px-md py-sm rounded-full border border-error text-error text-label-md font-medium hover:bg-error-container transition-colors"
             >
               <span className="material-symbols-outlined text-[18px]">delete_forever</span>
               Hapus Semua Data Shopee
             </button>
             <button
               onClick={() => setClearPlatform('tiktok')}
-              className="flex items-center gap-sm px-md py-sm rounded-lg border border-error text-error text-label-md font-medium hover:bg-error-container transition-colors"
+              className="flex items-center gap-sm px-md py-sm rounded-full border border-error text-error text-label-md font-medium hover:bg-error-container transition-colors"
             >
               <span className="material-symbols-outlined text-[18px]">delete_forever</span>
               Hapus Semua Data TikTok

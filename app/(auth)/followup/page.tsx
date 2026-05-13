@@ -34,11 +34,11 @@ type ConfirmMode =
 // ─── Config ───────────────────────────────────────────────────────────────────
 
 const contactStatusConfig: Record<ContactStatus, { label: string; color: string }> = {
-  belum_dihubungi:  { label: 'Belum Dihubungi',  color: 'bg-gray-100 text-gray-700'     },
-  menunggu_balasan: { label: 'Menunggu Balasan',  color: 'bg-yellow-100 text-yellow-700' },
-  terkontак:        { label: 'Terkontак',         color: 'bg-green-100 text-green-700'   },
-  diabaikan:        { label: 'Diabaikan',         color: 'bg-red-100 text-red-700'       },
-  gagal_hubungi:    { label: 'Gagal Hubungi',     color: 'bg-orange-100 text-orange-700' },
+  belum_dihubungi:  { label: 'Belum Dihubungi',  color: 'bg-surface-container-highest text-on-surface-variant' },
+  menunggu_balasan: { label: 'Menunggu Balasan',  color: 'bg-secondary-container text-on-secondary-container'  },
+  terkontак:        { label: 'Terkontак',         color: 'bg-primary-fixed text-on-primary-fixed'              },
+  diabaikan:        { label: 'Diabaikan',         color: 'bg-error-container text-on-error-container'          },
+  gagal_hubungi:    { label: 'Gagal Hubungi',     color: 'bg-tertiary-fixed text-on-tertiary-fixed'            },
 }
 
 const categories: { value: Category; label: string; icon: string }[] = [
@@ -123,7 +123,7 @@ function UpdateModal({ customer, onClose, onSaved }: UpdateModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-lg w-full max-w-md p-xl flex flex-col gap-md mx-md">
+      <div className="bg-surface-container-lowest rounded-xl shadow-elevation-3 w-full max-w-md p-xl flex flex-col gap-md mx-md">
         <div className="flex items-start justify-between">
           <div>
             <h2 className="text-h2 text-on-surface">{customer.name}</h2>
@@ -143,7 +143,7 @@ function UpdateModal({ customer, onClose, onSaved }: UpdateModalProps) {
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as ContactStatus)}
-            className="w-full border border-outline-variant rounded-lg px-md py-sm text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
+            className="w-full border border-outline rounded-xl px-md py-sm text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
           >
             {Object.entries(contactStatusConfig).map(([val, { label }]) => (
               <option key={val} value={val}>{label}</option>
@@ -158,7 +158,7 @@ function UpdateModal({ customer, onClose, onSaved }: UpdateModalProps) {
             onChange={(e) => setNote(e.target.value)}
             rows={3}
             placeholder="Catatan hasil follow-up..."
-            className="w-full border border-outline-variant rounded-lg px-md py-sm text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary placeholder:text-on-surface-variant resize-none"
+            className="w-full border border-outline rounded-xl px-md py-sm text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary placeholder:text-on-surface-variant resize-none"
           />
         </div>
 
@@ -169,14 +169,14 @@ function UpdateModal({ customer, onClose, onSaved }: UpdateModalProps) {
         <div className="flex gap-sm justify-end">
           <button
             onClick={onClose}
-            className="px-lg py-sm rounded-lg border border-outline-variant text-label-md text-on-surface hover:bg-surface-container-low transition-colors"
+            className="px-lg py-sm rounded-full border border-outline text-label-md text-on-surface hover:bg-surface-container-low transition-colors"
           >
             Batal
           </button>
           <button
             onClick={save}
             disabled={saving}
-            className="px-lg py-sm rounded-lg bg-primary text-on-primary text-label-md font-medium hover:bg-primary-container transition-colors disabled:opacity-60"
+            className="px-lg py-sm rounded-full bg-primary text-on-primary text-label-md font-medium hover:opacity-90 transition-opacity disabled:opacity-60"
           >
             {saving ? 'Menyimpan...' : 'Simpan'}
           </button>
@@ -505,10 +505,10 @@ export default function FollowUpPage() {
           {/* Update Massal toggle */}
           <button
             onClick={toggleBulkMode}
-            className={`flex items-center gap-xs px-md py-xs rounded-lg border text-label-md font-medium transition-colors ${
+            className={`flex items-center gap-xs px-md py-xs rounded-full border text-label-md font-medium transition-colors ${
               bulkMode
                 ? 'bg-primary text-on-primary border-primary'
-                : 'border-outline-variant text-on-surface hover:bg-surface-container-low'
+                : 'border-outline text-on-surface hover:bg-surface-container-low'
             }`}
           >
             <span className="material-symbols-outlined text-[16px]">
@@ -518,7 +518,7 @@ export default function FollowUpPage() {
           </button>
 
           {/* Platform toggle */}
-          <div className="flex rounded-lg border border-outline-variant overflow-hidden">
+          <div className="flex rounded-full border border-outline overflow-hidden">
             {(['', 'shopee', 'tiktok'] as const).map((p, i) => (
               <button
                 key={p}
@@ -560,7 +560,7 @@ export default function FollowUpPage() {
 
       {/* ── Category description ──────────────────────────────────────────────── */}
       {category !== 'semua' && categoryDescriptions[category] && (
-        <div className="bg-surface-container rounded-lg px-md py-sm text-body-sm text-on-surface-variant flex items-center gap-sm">
+        <div className="bg-secondary-container text-on-secondary-container rounded-xl px-md py-sm text-body-sm flex items-center gap-sm">
           <span className="material-symbols-outlined text-[16px] shrink-0">info</span>
           {categoryDescriptions[category]}
         </div>
@@ -569,14 +569,14 @@ export default function FollowUpPage() {
       {/* ── Filters ───────────────────────────────────────────────────────────── */}
       <div className="flex flex-wrap gap-sm items-center">
         {/* Search */}
-        <div className="relative flex-1 min-w-[180px] max-w-xs">
-          <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+        <div className="flex items-center bg-surface-container-high rounded-full px-md gap-sm flex-1 min-w-[180px] max-w-xs">
+          <span className="material-symbols-outlined text-on-surface-variant text-[18px] shrink-0">search</span>
           <input
             type="text"
             placeholder="Cari username..."
             value={search}
             onChange={(e) => handleSearchInput(e.target.value)}
-            className="w-full pl-9 pr-md py-xs border border-outline-variant rounded-lg text-body-md bg-surface-container-lowest focus:outline-none focus:border-primary text-on-surface placeholder:text-on-surface-variant"
+            className="flex-1 py-xs bg-transparent border-0 focus:outline-none text-body-md text-on-surface placeholder:text-on-surface-variant"
           />
         </div>
 
@@ -584,7 +584,7 @@ export default function FollowUpPage() {
         <select
           value={contactStatus}
           onChange={(e) => { setContactStatus(e.target.value as ContactStatus | ''); setPage(1) }}
-          className="border border-outline-variant rounded-lg px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
+          className="border border-outline rounded-full px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
         >
           <option value="">Semua Status Kontak</option>
           {Object.entries(contactStatusConfig).map(([v, { label }]) => (
@@ -596,7 +596,7 @@ export default function FollowUpPage() {
         <select
           value={tag}
           onChange={(e) => { setTag(e.target.value as CustomerTag | ''); setPage(1) }}
-          className="border border-outline-variant rounded-lg px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
+          className="border border-outline rounded-full px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
         >
           <option value="">Semua Tag</option>
           <option value="new">Baru</option>
@@ -616,7 +616,7 @@ export default function FollowUpPage() {
             value={noFromStr}
             onChange={(e) => setNoFromStr(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && applyNoRange()}
-            className="w-16 border border-outline-variant rounded-lg px-sm py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary text-center"
+            className="w-16 border border-outline rounded-full px-sm py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary text-center"
           />
           <span className="text-body-sm text-on-surface-variant">–</span>
           <input
@@ -626,18 +626,18 @@ export default function FollowUpPage() {
             value={noToStr}
             onChange={(e) => setNoToStr(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && applyNoRange()}
-            className="w-16 border border-outline-variant rounded-lg px-sm py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary text-center"
+            className="w-16 border border-outline rounded-full px-sm py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary text-center"
           />
           <button
             onClick={applyNoRange}
-            className="px-sm py-xs rounded border border-outline-variant text-label-sm text-on-surface hover:bg-surface-container-low transition-colors"
+            className="px-sm py-xs rounded-full border border-outline text-label-sm text-on-surface hover:bg-surface-container-low transition-colors"
           >
             Terapkan
           </button>
           {(noFrom > 0 || noTo > 0) && (
             <button
               onClick={clearNoRange}
-              className="px-sm py-xs rounded text-label-sm text-error hover:bg-error-container transition-colors"
+              className="px-sm py-xs rounded-full text-label-sm text-error hover:bg-error-container transition-colors"
             >
               Reset
             </button>
@@ -650,7 +650,7 @@ export default function FollowUpPage() {
         <button
           onClick={handleExport}
           disabled={exporting}
-          className="flex items-center gap-xs px-md py-xs rounded-lg border border-outline-variant text-label-md text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-50"
+          className="flex items-center gap-xs px-md py-xs rounded-full border border-outline text-label-md text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-50"
         >
           <span className="material-symbols-outlined text-[18px]">
             {exporting ? 'progress_activity' : 'download'}
@@ -660,10 +660,10 @@ export default function FollowUpPage() {
       </div>
 
       {/* ── Table ─────────────────────────────────────────────────────────────── */}
-      <div className="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+      <div className="bg-surface-container-low rounded-xl overflow-hidden shadow-elevation-1">
         <div className="overflow-x-auto">
           <table className="w-full text-body-md min-w-[960px]">
-            <thead className="bg-surface-container-low border-b border-outline-variant">
+            <thead className="bg-surface-container border-b border-outline-variant">
               <tr>
                 {/* Checkbox header — only in bulk mode */}
                 {bulkMode && (
@@ -783,7 +783,7 @@ export default function FollowUpPage() {
                         <button
                           onClick={() => copyUsername(c.name, c.platform)}
                           title={`Salin username untuk chat ${c.platform === 'shopee' ? 'Shopee' : 'TikTok'}`}
-                          className={`inline-flex items-center gap-xs px-sm py-xs rounded text-white text-label-sm font-medium transition-colors ${
+                          className={`inline-flex items-center gap-xs px-sm py-xs rounded-full text-white text-label-sm font-medium transition-colors ${
                             c.platform === 'shopee'
                               ? 'bg-orange-500 hover:bg-orange-600'
                               : 'bg-zinc-800 hover:bg-zinc-900'
@@ -798,7 +798,7 @@ export default function FollowUpPage() {
                         <button
                           onClick={() => { if (!bulkMode) setSelected(c) }}
                           disabled={bulkMode}
-                          className="inline-flex items-center gap-xs px-sm py-xs rounded border border-outline-variant text-label-sm text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          className="inline-flex items-center gap-xs px-sm py-xs rounded-full border border-outline text-label-sm text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                           <span className="material-symbols-outlined text-[14px]">edit</span>
                           Update
@@ -822,7 +822,7 @@ export default function FollowUpPage() {
               <button
                 disabled={page <= 1}
                 onClick={() => setPage((p) => p - 1)}
-                className="px-md py-xs rounded border border-outline-variant text-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-low transition-colors"
+                className="px-md py-xs rounded-full border border-outline text-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-low transition-colors"
               >
                 Sebelumnya
               </button>
@@ -832,7 +832,7 @@ export default function FollowUpPage() {
               <button
                 disabled={page >= totalPages}
                 onClick={() => setPage((p) => p + 1)}
-                className="px-md py-xs rounded border border-outline-variant text-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-low transition-colors"
+                className="px-md py-xs rounded-full border border-outline text-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-low transition-colors"
               >
                 Berikutnya
               </button>
@@ -848,7 +848,7 @@ export default function FollowUpPage() {
 
       {/* ── Bulk action bar (sticky bottom) ───────────────────────────────────── */}
       {bulkMode && (
-        <div className="fixed bottom-0 left-64 right-0 z-40 bg-surface-container-lowest border-t border-outline-variant shadow-lg">
+        <div className="fixed bottom-0 left-64 right-0 z-40 bg-surface-container-low border-t border-outline-variant shadow-elevation-2">
 
           {/* Confirmation strip */}
           {confirmMode ? (
@@ -863,7 +863,7 @@ export default function FollowUpPage() {
               <button
                 onClick={handleConfirm}
                 disabled={bulkApplying}
-                className="flex items-center gap-xs px-md py-xs rounded-lg bg-primary text-on-primary text-label-md font-medium hover:bg-primary-container transition-colors disabled:opacity-50"
+                className="flex items-center gap-xs px-md py-xs rounded-full bg-primary text-on-primary text-label-md font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
               >
                 {bulkApplying
                   ? <><span className="material-symbols-outlined text-[14px] animate-spin">progress_activity</span> Memperbarui...</>
@@ -873,7 +873,7 @@ export default function FollowUpPage() {
               <button
                 onClick={() => setConfirmMode(null)}
                 disabled={bulkApplying}
-                className="px-md py-xs rounded-lg border border-outline-variant text-label-md text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-50"
+                className="px-md py-xs rounded-full border border-outline text-label-md text-on-surface hover:bg-surface-container-low transition-colors disabled:opacity-50"
               >
                 Batal
               </button>
@@ -899,7 +899,7 @@ export default function FollowUpPage() {
                   value={rangeFromStr}
                   onChange={(e) => setRangeFromStr(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleRangeSelect()}
-                  className="w-16 border border-outline-variant rounded-lg px-sm py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary text-center"
+                  className="w-16 border border-outline rounded-full px-sm py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary text-center"
                 />
                 <span className="text-body-sm text-on-surface-variant">sampai</span>
                 <input
@@ -909,12 +909,12 @@ export default function FollowUpPage() {
                   value={rangeToStr}
                   onChange={(e) => setRangeToStr(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleRangeSelect()}
-                  className="w-16 border border-outline-variant rounded-lg px-sm py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary text-center"
+                  className="w-16 border border-outline rounded-full px-sm py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary text-center"
                 />
                 <button
                   onClick={handleRangeSelect}
                   disabled={!rangeFromStr || !rangeToStr}
-                  className="px-sm py-xs rounded border border-outline-variant text-label-sm text-on-surface hover:bg-surface-container-low disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+                  className="px-sm py-xs rounded-full border border-outline text-label-sm text-on-surface hover:bg-surface-container-low disabled:opacity-40 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
                 >
                   Pilih Rentang
                 </button>
@@ -926,7 +926,7 @@ export default function FollowUpPage() {
               <select
                 value={bulkStatus}
                 onChange={(e) => setBulkStatus(e.target.value as ContactStatus | '')}
-                className="border border-outline-variant rounded-lg px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
+                className="border border-outline rounded-full px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
               >
                 <option value="">Pilih Status Baru</option>
                 {Object.entries(contactStatusConfig).map(([v, { label }]) => (
@@ -940,7 +940,7 @@ export default function FollowUpPage() {
               <button
                 disabled={!bulkStatus || selectedIds.size === 0}
                 onClick={initiateBulkUpdate}
-                className="flex items-center gap-xs px-md py-xs rounded-lg bg-primary text-on-primary text-label-md font-medium hover:bg-primary-container transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                className="flex items-center gap-xs px-md py-xs rounded-full bg-primary text-on-primary text-label-md font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 <span className="material-symbols-outlined text-[16px]">check</span>
                 Terapkan ke Semua yang Dipilih
@@ -949,7 +949,7 @@ export default function FollowUpPage() {
               {/* Clear selection (stays in bulk mode) */}
               <button
                 onClick={() => { setSelectedIds(new Set()); setBulkStatus('') }}
-                className="flex items-center gap-xs px-md py-xs rounded-lg border border-outline-variant text-label-md text-on-surface hover:bg-surface-container-low transition-colors whitespace-nowrap"
+                className="flex items-center gap-xs px-md py-xs rounded-full border border-outline text-label-md text-on-surface hover:bg-surface-container-low transition-colors whitespace-nowrap"
               >
                 Batalkan Pilihan
               </button>

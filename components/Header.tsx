@@ -10,15 +10,15 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest border-b border-outline-variant flex items-center px-container-margin z-20">
-      <div className="flex-1 relative max-w-sm">
-        <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">
-          search
-        </span>
-        <input
-          type="text"
-          placeholder="Cari..."
-          className="w-full pl-10 pr-md py-xs border border-outline-variant rounded-lg text-body-md bg-surface-container focus:outline-none focus:border-primary text-on-surface placeholder:text-on-surface-variant transition-colors"
-        />
+      <div className="flex-1 max-w-sm">
+        <div className="flex items-center bg-surface-container-high rounded-full px-md gap-sm">
+          <span className="material-symbols-outlined text-on-surface-variant text-[20px] shrink-0">search</span>
+          <input
+            type="text"
+            placeholder="Cari..."
+            className="flex-1 py-sm bg-transparent border-0 focus:outline-none text-body-md text-on-surface placeholder:text-on-surface-variant"
+          />
+        </div>
       </div>
 
       <div className="flex items-center gap-md ml-auto">

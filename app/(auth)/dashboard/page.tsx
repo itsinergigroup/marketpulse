@@ -66,7 +66,7 @@ function KpiCard({
   positive?: boolean
 }) {
   return (
-    <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex items-start gap-md">
+    <div className="bg-surface-container-low rounded-xl p-lg flex items-start gap-md shadow-elevation-1">
       <div className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
         <span className="material-symbols-outlined text-primary text-[22px]">{icon}</span>
       </div>
@@ -176,7 +176,7 @@ export default function DashboardPage() {
 
       {/* Charts */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-md">
-        <div className="xl:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <div className="xl:col-span-2 bg-surface-container-low rounded-xl p-lg shadow-elevation-1">
           <h2 className="text-h2 text-on-surface mb-md">Revenue Harian</h2>
           {lineValues.length > 0 ? (
             <Line
@@ -211,7 +211,7 @@ export default function DashboardPage() {
           )}
         </div>
 
-        <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <div className="bg-surface-container-low rounded-xl p-lg shadow-elevation-1">
           <h2 className="text-h2 text-on-surface mb-md">Segmen Pelanggan</h2>
           {donutValues.length > 0 ? (
             <Doughnut
@@ -235,7 +235,7 @@ export default function DashboardPage() {
       {/* Tables */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-md">
         {/* Recent Orders */}
-        <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <div className="bg-surface-container-low rounded-xl p-lg shadow-elevation-1">
           <h2 className="text-h2 text-on-surface mb-md">Pesanan Terbaru</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-body-md">
@@ -270,7 +270,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Top Customers */}
-        <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <div className="bg-surface-container-low rounded-xl p-lg shadow-elevation-1">
           <h2 className="text-h2 text-on-surface mb-md">Top Pelanggan</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-body-md">

@@ -82,37 +82,37 @@ export default function PelangganPage() {
 
       {/* Filters */}
       <div className="flex flex-wrap gap-sm">
-        <div className="relative flex-1 min-w-[200px] max-w-sm">
-          <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+        <div className="flex items-center bg-surface-container-high rounded-full px-md gap-sm flex-1 min-w-[200px] max-w-sm">
+          <span className="material-symbols-outlined text-on-surface-variant text-[18px] shrink-0">search</span>
           <input
             type="text"
             placeholder="Cari nama atau no. HP..."
             value={search}
             onInput={handleSearch}
-            className="w-full pl-9 pr-md py-xs border border-outline-variant rounded-lg text-body-md bg-surface-container-lowest focus:outline-none focus:border-primary text-on-surface placeholder:text-on-surface-variant transition-colors"
+            className="flex-1 py-xs bg-transparent border-0 focus:outline-none text-body-md text-on-surface placeholder:text-on-surface-variant"
           />
         </div>
         <select
           value={tag}
           onChange={(e) => { setTag(e.target.value as CustomerTag | ''); setPage(1) }}
-          className="border border-outline-variant rounded-lg px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
+          className="border border-outline rounded-full px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
         >
           {tagOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
         <select
           value={platform}
           onChange={(e) => { setPlatform(e.target.value as Platform | ''); setPage(1) }}
-          className="border border-outline-variant rounded-lg px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
+          className="border border-outline rounded-full px-md py-xs text-body-md bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary"
         >
           {platformOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
       </div>
 
       {/* Table */}
-      <div className="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+      <div className="bg-surface-container-low rounded-xl overflow-hidden shadow-elevation-1">
         <div className="overflow-x-auto">
           <table className="w-full text-body-md">
-            <thead className="bg-surface-container-low border-b border-outline-variant">
+            <thead className="bg-surface-container border-b border-outline-variant">
               <tr>
                 <th className="text-left px-md py-sm text-label-sm text-on-surface-variant font-medium">Pelanggan</th>
                 <th className="text-left px-md py-sm text-label-sm text-on-surface-variant font-medium">No. HP</th>
@@ -158,14 +158,14 @@ export default function PelangganPage() {
               <button
                 disabled={page <= 1}
                 onClick={() => setPage((p) => p - 1)}
-                className="px-md py-xs rounded border border-outline-variant text-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-low transition-colors"
+                className="px-md py-xs rounded-full border border-outline text-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-low transition-colors"
               >
                 Sebelumnya
               </button>
               <button
                 disabled={page >= totalPages}
                 onClick={() => setPage((p) => p + 1)}
-                className="px-md py-xs rounded border border-outline-variant text-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-low transition-colors"
+                className="px-md py-xs rounded-full border border-outline text-label-md text-on-surface disabled:opacity-40 hover:bg-surface-container-low transition-colors"
               >
                 Berikutnya
               </button>

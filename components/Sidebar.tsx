@@ -28,10 +28,10 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`flex items-center gap-sm px-md py-sm rounded text-label-md transition-colors ${
+      className={`flex items-center gap-sm px-md py-sm rounded-full text-label-md transition-colors ${
         active
-          ? 'bg-surface-container-low text-primary-container border-l-4 border-primary-container rounded-r font-medium'
-          : 'text-secondary hover:bg-surface-container-low'
+          ? 'bg-primary-container text-on-primary-container font-medium'
+          : 'text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
       }`}
     >
       <span className="material-symbols-outlined text-[20px]">{icon}</span>
@@ -83,7 +83,7 @@ export default function Sidebar() {
         <button
           type="button"
           onClick={handleLogout}
-          className="flex items-center gap-sm px-md py-sm rounded text-label-md text-error hover:bg-error-container transition-colors w-full text-left"
+          className="flex items-center gap-sm px-md py-sm rounded-full text-label-md text-error hover:bg-error-container transition-colors w-full text-left"
         >
           <span className="material-symbols-outlined text-[20px]">logout</span>
           Keluar

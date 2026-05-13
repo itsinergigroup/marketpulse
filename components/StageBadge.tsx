@@ -1,11 +1,11 @@
 import { CustomerTag } from '@prisma/client'
 
 const tagConfig: Record<CustomerTag, { label: string; className: string }> = {
-  new: { label: 'Baru', className: 'bg-blue-100 text-blue-800' },
-  repeat: { label: 'Repeat', className: 'bg-orange-100 text-orange-800' },
-  vip: { label: 'VIP', className: 'bg-purple-100 text-purple-800' },
-  at_risk: { label: 'At Risk', className: 'bg-red-100 text-red-800' },
-  lost: { label: 'Lost', className: 'bg-gray-200 text-gray-800' },
+  new:     { label: 'Baru',    className: 'bg-secondary-container text-on-secondary-container' },
+  repeat:  { label: 'Repeat',  className: 'bg-tertiary-fixed text-on-tertiary-fixed' },
+  vip:     { label: 'VIP',     className: 'bg-primary-fixed text-on-primary-fixed' },
+  at_risk: { label: 'At Risk', className: 'bg-error-container text-on-error-container' },
+  lost:    { label: 'Lost',    className: 'bg-surface-container-highest text-on-surface-variant' },
 }
 
 export default function StageBadge({ tag }: { tag: CustomerTag }) {

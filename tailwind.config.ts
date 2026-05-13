@@ -83,7 +83,14 @@ const config: Config = {
         'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }],
       },
       fontFamily: {
+        'google-sans': ['"Google Sans"', 'Roboto', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
+      },
+      boxShadow: {
+        'elevation-1': '0px 1px 2px rgba(0,0,0,0.3), 0px 1px 3px 1px rgba(0,0,0,0.15)',
+        'elevation-2': '0px 1px 2px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15)',
+        'elevation-3': '0px 4px 8px 3px rgba(0,0,0,0.15), 0px 1px 3px rgba(0,0,0,0.3)',
       },
     },
   },
